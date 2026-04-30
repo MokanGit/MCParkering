@@ -1,6 +1,7 @@
 {
   "images" : [
     {
+      "filename" : "mc_parking_app_icon_1777545467291.png",
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"
@@ -12,6 +13,7 @@
           "value" : "dark"
         }
       ],
+      "filename" : "mc_parking_app_icon_dark_1777545666271.png",
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"
@@ -23,6 +25,7 @@
           "value" : "tinted"
         }
       ],
+      "filename" : "mc_parking_app_icon_tinted_1777545677704.png",
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"

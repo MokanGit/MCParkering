@@ -6,14 +6,83 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		4BBCD0A82FA3613800541D5B /* MCParkeringShare.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 4BBCD09E2FA3613700541D5B /* MCParkeringShare.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		4BBCD0B52FA390AC00541D5B /* fetch_data.py in Resources */ = {isa = PBXBuildFile; fileRef = 4BBCD0B22FA390AC00541D5B /* fetch_data.py */; };
+		4BBCD0B62FA390AC00541D5B /* optimize_json.py in Resources */ = {isa = PBXBuildFile; fileRef = 4BBCD0B32FA390AC00541D5B /* optimize_json.py */; };
+		4BBCD0B82FA3911700541D5B /* .env in Resources */ = {isa = PBXBuildFile; fileRef = 4BBCD0B72FA3911700541D5B /* .env */; };
+		4BBCD0BA2FA392D900541D5B /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 4BBCD0B92FA392D900541D5B /* README.md */; };
+		4BBCD0BC2FA3931800541D5B /* example.env in Resources */ = {isa = PBXBuildFile; fileRef = 4BBCD0BB2FA3931800541D5B /* example.env */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4BBCD0A62FA3613800541D5B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4BBCD07C2FA34EA700541D5B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4BBCD09D2FA3613700541D5B;
+			remoteInfo = MCParkeringShare;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		4BBCD0AD2FA3613800541D5B /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				4BBCD0A82FA3613800541D5B /* MCParkeringShare.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		4BBCD0842FA34EA700541D5B /* MCParkering.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MCParkering.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4BBCD09E2FA3613700541D5B /* MCParkeringShare.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MCParkeringShare.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		4BBCD0B22FA390AC00541D5B /* fetch_data.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = fetch_data.py; sourceTree = "<group>"; };
+		4BBCD0B32FA390AC00541D5B /* optimize_json.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = optimize_json.py; sourceTree = "<group>"; };
+		4BBCD0B72FA3911700541D5B /* .env */ = {isa = PBXFileReference; lastKnownFileType = text; path = .env; sourceTree = "<group>"; };
+		4BBCD0B92FA392D900541D5B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		4BBCD0BB2FA3931800541D5B /* example.env */ = {isa = PBXFileReference; lastKnownFileType = text; path = example.env; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		4BBCD0A92FA3613800541D5B /* Exceptions for "MCParkeringShare" folder in "MCParkeringShare" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 4BBCD09D2FA3613700541D5B /* MCParkeringShare */;
+		};
+		4BBCD0AF2FA3616A00541D5B /* Exceptions for "MCParkering" folder in "MCParkeringShare" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				mc_parkering_sthlm.json,
+				ParkingDataClient.swift,
+				ParkingModels.swift,
+			);
+			target = 4BBCD09D2FA3613700541D5B /* MCParkeringShare */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		4BBCD0862FA34EA700541D5B /* MCParkering */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				4BBCD0AF2FA3616A00541D5B /* Exceptions for "MCParkering" folder in "MCParkeringShare" target */,
+			);
 			path = MCParkering;
+			sourceTree = "<group>";
+		};
+		4BBCD09F2FA3613700541D5B /* MCParkeringShare */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				4BBCD0A92FA3613800541D5B /* Exceptions for "MCParkeringShare" folder in "MCParkeringShare" target */,
+			);
+			path = MCParkeringShare;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -26,13 +95,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		4BBCD09B2FA3613700541D5B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		4BBCD07B2FA34EA700541D5B = {
 			isa = PBXGroup;
 			children = (
+				4BBCD0BB2FA3931800541D5B /* example.env */,
+				4BBCD0B92FA392D900541D5B /* README.md */,
+				4BBCD0B42FA390AC00541D5B /* Scripts */,
 				4BBCD0862FA34EA700541D5B /* MCParkering */,
+				4BBCD09F2FA3613700541D5B /* MCParkeringShare */,
 				4BBCD0852FA34EA700541D5B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -41,8 +121,19 @@
 			isa = PBXGroup;
 			children = (
 				4BBCD0842FA34EA700541D5B /* MCParkering.app */,
+				4BBCD09E2FA3613700541D5B /* MCParkeringShare.appex */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		4BBCD0B42FA390AC00541D5B /* Scripts */ = {
+			isa = PBXGroup;
+			children = (
+				4BBCD0B72FA3911700541D5B /* .env */,
+				4BBCD0B22FA390AC00541D5B /* fetch_data.py */,
+				4BBCD0B32FA390AC00541D5B /* optimize_json.py */,
+			);
+			path = Scripts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -55,10 +146,12 @@
 				4BBCD0802FA34EA700541D5B /* Sources */,
 				4BBCD0812FA34EA700541D5B /* Frameworks */,
 				4BBCD0822FA34EA700541D5B /* Resources */,
+				4BBCD0AD2FA3613800541D5B /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				4BBCD0A72FA3613800541D5B /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				4BBCD0862FA34EA700541D5B /* MCParkering */,
@@ -69,6 +162,28 @@
 			productName = MCParkering;
 			productReference = 4BBCD0842FA34EA700541D5B /* MCParkering.app */;
 			productType = "com.apple.product-type.application";
+		};
+		4BBCD09D2FA3613700541D5B /* MCParkeringShare */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4BBCD0AA2FA3613800541D5B /* Build configuration list for PBXNativeTarget "MCParkeringShare" */;
+			buildPhases = (
+				4BBCD09A2FA3613700541D5B /* Sources */,
+				4BBCD09B2FA3613700541D5B /* Frameworks */,
+				4BBCD09C2FA3613700541D5B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				4BBCD09F2FA3613700541D5B /* MCParkeringShare */,
+			);
+			name = MCParkeringShare;
+			packageProductDependencies = (
+			);
+			productName = MCParkeringShare;
+			productReference = 4BBCD09E2FA3613700541D5B /* MCParkeringShare.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -81,6 +196,9 @@
 				LastUpgradeCheck = 2640;
 				TargetAttributes = {
 					4BBCD0832FA34EA700541D5B = {
+						CreatedOnToolsVersion = 26.4.1;
+					};
+					4BBCD09D2FA3613700541D5B = {
 						CreatedOnToolsVersion = 26.4.1;
 					};
 				};
@@ -100,12 +218,25 @@
 			projectRoot = "";
 			targets = (
 				4BBCD0832FA34EA700541D5B /* MCParkering */,
+				4BBCD09D2FA3613700541D5B /* MCParkeringShare */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		4BBCD0822FA34EA700541D5B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4BBCD0BA2FA392D900541D5B /* README.md in Resources */,
+				4BBCD0B82FA3911700541D5B /* .env in Resources */,
+				4BBCD0BC2FA3931800541D5B /* example.env in Resources */,
+				4BBCD0B52FA390AC00541D5B /* fetch_data.py in Resources */,
+				4BBCD0B62FA390AC00541D5B /* optimize_json.py in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4BBCD09C2FA3613700541D5B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -122,7 +253,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		4BBCD09A2FA3613700541D5B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4BBCD0A72FA3613800541D5B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4BBCD09D2FA3613700541D5B /* MCParkeringShare */;
+			targetProxy = 4BBCD0A62FA3613800541D5B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		4BBCD08D2FA34EB800541D5B /* Debug */ = {
@@ -251,13 +397,17 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Z57TC8X7VK;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Vi behöver din plats för att kunna visa närmaste MC-parkering.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -282,13 +432,17 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Z57TC8X7VK;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Vi behöver din plats för att kunna visa närmaste MC-parkering.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -299,6 +453,64 @@
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		4BBCD0AB2FA3613800541D5B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Z57TC8X7VK;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MCParkeringShare/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = MCParkeringShare;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = tech.mokan..MCParkering.MCParkeringShare;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		4BBCD0AC2FA3613800541D5B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Z57TC8X7VK;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MCParkeringShare/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = MCParkeringShare;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = tech.mokan..MCParkering.MCParkeringShare;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
@@ -323,6 +535,15 @@
 			buildConfigurations = (
 				4BBCD0902FA34EB800541D5B /* Debug */,
 				4BBCD0912FA34EB800541D5B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4BBCD0AA2FA3613800541D5B /* Build configuration list for PBXNativeTarget "MCParkeringShare" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4BBCD0AB2FA3613800541D5B /* Debug */,
+				4BBCD0AC2FA3613800541D5B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
