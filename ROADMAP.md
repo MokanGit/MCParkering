@@ -9,6 +9,7 @@ Roadmapen skiljer mellan vad som finns i appen i dag och vad som är tänkt fram
 - detaljvy och navigering i Apple Maps
 - Share Extension för kartobjekt, text och länkar
 - lokal, optimerad JSON-data
+- schemalagd och manuellt startbar datauppdatering via GitHub Actions
 - intern distribution via Xcode Cloud och TestFlight
 
 ## Nu: kvalitet och gemensam kärna
@@ -18,7 +19,7 @@ Roadmapen skiljer mellan vad som finns i appen i dag och vad som är tänkt fram
 - [ ] Flytta gemensam logik till `FindParkingUseCase` med tydliga repository- och resolvergränssnitt.
 - [ ] Minska ansvaret i `ShareViewController` genom att separera parsing, destinationsupplösning och presentation.
 - [ ] Granska diagnostisk loggning så att delade adresser och koordinater inte exponeras i produktionsloggar.
-- [ ] Gör datapipelinen reproducerbar i ett enda kommando och skapa stabila identifierare mellan datauppdateringar.
+- [x] Gör datapipelinen reproducerbar med validering, stabila identifierare och en granskningsbar draft pull request.
 - [ ] Inför automatiska pull request-kontroller för build, tester och eventuell lintning.
 - [ ] Lägg till skärmbilder eller en kort demo i README.
 

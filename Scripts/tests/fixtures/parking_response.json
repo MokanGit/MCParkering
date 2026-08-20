@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "id": "mc-2",
+      "geometry": {
+        "coordinates": [
+          [18.071, 59.341],
+          [18.072, 59.342]
+        ]
+      },
+      "properties": {
+        "ADDRESS": "Birger Jarlsgatan",
+        "PARKING_RATE": "Taxa 2",
+        "OTHER_INFO": "Servicetid onsdag"
+      }
+    },
+    {
+      "id": "mc-1",
+      "geometry": {
+        "coordinates": [18.063, 59.334]
+      },
+      "properties": {
+        "ADDRESS": "Sturegatan",
+        "PARKING_RATE": null,
+        "OTHER_INFO": "  "
+      }
+    }
+  ]
+}

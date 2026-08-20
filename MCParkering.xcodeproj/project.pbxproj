@@ -37,17 +37,14 @@
 /* Begin PBXFileReference section */
 		4BBCD0842FA34EA700541D5B /* MCParkering.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MCParkering.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BBCD09E2FA3613700541D5B /* MCParkeringShare.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MCParkeringShare.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		4BBCD0B22FA390AC00541D5B /* fetch_data.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = fetch_data.py; sourceTree = "<group>"; };
-		4BBCD0B32FA390AC00541D5B /* optimize_json.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = optimize_json.py; sourceTree = "<group>"; };
-		4BBCD0B72FA3911700541D5B /* .env */ = {isa = PBXFileReference; lastKnownFileType = text; path = .env; sourceTree = "<group>"; };
 		4BBCD0B92FA392D900541D5B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		4BBCD0BB2FA3931800541D5B /* example.env */ = {isa = PBXFileReference; lastKnownFileType = text; path = example.env; sourceTree = "<group>"; };
 		4BE6D416303702FD00408DE0 /* Logg.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Logg.md; sourceTree = "<group>"; };
 		4BE6D417303719B300408DE0 /* ai-workflow.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "ai-workflow.md"; sourceTree = "<group>"; };
 		4BE6D418303719B300408DE0 /* architecture.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = architecture.md; sourceTree = "<group>"; };
 		4BE6D419303719B300408DE0 /* ci-cd.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "ci-cd.md"; sourceTree = "<group>"; };
 		4BE6D41A303719B300408DE0 /* data-pipeline.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "data-pipeline.md"; sourceTree = "<group>"; };
 		4BE6D41B303719B300408DE0 /* lessons-learned.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "lessons-learned.md"; sourceTree = "<group>"; };
+		4BE6D41D303719B300408DE0 /* update_parking_data.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = update_parking_data.py; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -119,7 +116,6 @@
 			children = (
 				4BE6D41C303719B300408DE0 /* docs */,
 				4BE6D416303702FD00408DE0 /* Logg.md */,
-				4BBCD0BB2FA3931800541D5B /* example.env */,
 				4BBCD0B92FA392D900541D5B /* README.md */,
 				4BBCD0B42FA390AC00541D5B /* Scripts */,
 				4BBCD0862FA34EA700541D5B /* MCParkering */,
@@ -140,9 +136,7 @@
 		4BBCD0B42FA390AC00541D5B /* Scripts */ = {
 			isa = PBXGroup;
 			children = (
-				4BBCD0B72FA3911700541D5B /* .env */,
-				4BBCD0B22FA390AC00541D5B /* fetch_data.py */,
-				4BBCD0B32FA390AC00541D5B /* optimize_json.py */,
+				4BE6D41D303719B300408DE0 /* update_parking_data.py */,
 			);
 			path = Scripts;
 			sourceTree = "<group>";

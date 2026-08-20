@@ -29,7 +29,9 @@ Kontrollera också [ROADMAP.md](ROADMAP.md) och befintliga issues för att undvi
 6. Håll ändringen fokuserad och uppdatera dokumentation eller tester när beteendet ändras.
 7. Skicka en pull request mot `main`.
 
-Den paketerade parkeringsdatan gör att appen kan byggas utan API-nyckel. Följ bara [data-pipelinen](docs/data-pipeline.md) om bidraget kräver ett uppdaterat dataset.
+Den paketerade parkeringsdatan gör att appen kan byggas utan API-nyckel. Datasetet uppdateras normalt av en maintainerstyrd GitHub Action som öppnar en draft pull request. Bidragsgivare behöver inte och ska inte få tillgång till uppdateringsnyckeln.
+
+Ändringar i transformeringen ska verifieras mot den incheckade test-fixturen enligt [data-pipelinen](docs/data-pipeline.md).
 
 ## Lokal signering
 
