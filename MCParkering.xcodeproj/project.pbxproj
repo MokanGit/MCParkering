@@ -10,9 +10,7 @@
 		4BBCD0A82FA3613800541D5B /* MCParkeringShare.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 4BBCD09E2FA3613700541D5B /* MCParkeringShare.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		4BBCD0B52FA390AC00541D5B /* fetch_data.py in Resources */ = {isa = PBXBuildFile; fileRef = 4BBCD0B22FA390AC00541D5B /* fetch_data.py */; };
 		4BBCD0B62FA390AC00541D5B /* optimize_json.py in Resources */ = {isa = PBXBuildFile; fileRef = 4BBCD0B32FA390AC00541D5B /* optimize_json.py */; };
-		4BBCD0B82FA3911700541D5B /* .env in Resources */ = {isa = PBXBuildFile; fileRef = 4BBCD0B72FA3911700541D5B /* .env */; };
 		4BBCD0BA2FA392D900541D5B /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 4BBCD0B92FA392D900541D5B /* README.md */; };
-		4BBCD0BC2FA3931800541D5B /* example.env in Resources */ = {isa = PBXBuildFile; fileRef = 4BBCD0BB2FA3931800541D5B /* example.env */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -193,7 +191,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 2640;
-				LastUpgradeCheck = 2640;
+				LastUpgradeCheck = 2660;
 				TargetAttributes = {
 					4BBCD0832FA34EA700541D5B = {
 						CreatedOnToolsVersion = 26.4.1;
@@ -229,8 +227,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4BBCD0BA2FA392D900541D5B /* README.md in Resources */,
-				4BBCD0B82FA3911700541D5B /* .env in Resources */,
-				4BBCD0BC2FA3931800541D5B /* example.env in Resources */,
 				4BBCD0B52FA390AC00541D5B /* fetch_data.py in Resources */,
 				4BBCD0B62FA390AC00541D5B /* optimize_json.py in Resources */,
 			);
@@ -329,6 +325,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -385,6 +382,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -430,9 +428,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Z57TC8X7VK;
+				DEVELOPMENT_TEAM = LY9ARPRAGG;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
@@ -448,8 +447,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = tech.mokan..MCParkering;
+				PRODUCT_BUNDLE_IDENTIFIER = tech.mokan.MCParkering;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
@@ -465,7 +465,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Z57TC8X7VK;
+				DEVELOPMENT_TEAM = LY9ARPRAGG;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MCParkeringShare/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = MCParkeringShare;
@@ -477,7 +477,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = tech.mokan..MCParkering.MCParkeringShare;
+				PRODUCT_BUNDLE_IDENTIFIER = tech.mokan.MCParkering;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -494,7 +494,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Z57TC8X7VK;
+				DEVELOPMENT_TEAM = LY9ARPRAGG;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MCParkeringShare/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = MCParkeringShare;
@@ -506,7 +506,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = tech.mokan..MCParkering.MCParkeringShare;
+				PRODUCT_BUNDLE_IDENTIFIER = tech.mokan.MCParkering.MCParkeringShare;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
