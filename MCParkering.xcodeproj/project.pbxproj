@@ -8,9 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		4BBCD0A82FA3613800541D5B /* MCParkeringShare.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 4BBCD09E2FA3613700541D5B /* MCParkeringShare.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		4BBCD0B52FA390AC00541D5B /* fetch_data.py in Resources */ = {isa = PBXBuildFile; fileRef = 4BBCD0B22FA390AC00541D5B /* fetch_data.py */; };
-		4BBCD0B62FA390AC00541D5B /* optimize_json.py in Resources */ = {isa = PBXBuildFile; fileRef = 4BBCD0B32FA390AC00541D5B /* optimize_json.py */; };
-		4BBCD0BA2FA392D900541D5B /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 4BBCD0B92FA392D900541D5B /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,12 +61,20 @@
 			);
 			target = 4BBCD09D2FA3613700541D5B /* MCParkeringShare */;
 		};
+		4BE6D4153036EBF000408DE0 /* Exceptions for "MCParkering" folder in "MCParkering" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 4BBCD0832FA34EA700541D5B /* MCParkering */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		4BBCD0862FA34EA700541D5B /* MCParkering */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
+				4BE6D4153036EBF000408DE0 /* Exceptions for "MCParkering" folder in "MCParkering" target */,
 				4BBCD0AF2FA3616A00541D5B /* Exceptions for "MCParkering" folder in "MCParkeringShare" target */,
 			);
 			path = MCParkering;
@@ -226,9 +231,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4BBCD0BA2FA392D900541D5B /* README.md in Resources */,
-				4BBCD0B52FA390AC00541D5B /* fetch_data.py in Resources */,
-				4BBCD0B62FA390AC00541D5B /* optimize_json.py in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -394,11 +396,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Z57TC8X7VK;
+				CURRENT_PROJECT_VERSION = 2;
+				DEVELOPMENT_TEAM = LY9ARPRAGG;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_FILE = MCParkering/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "";
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.navigation";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Vi behöver din plats för att kunna visa närmaste MC-parkering.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -410,16 +415,20 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = tech.mokan..MCParkering;
+				MARKETING_VERSION = 1;
+				PRODUCT_BUNDLE_IDENTIFIER = tech.mokan.MCParkering;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -430,11 +439,14 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = LY9ARPRAGG;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_FILE = MCParkering/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "";
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.navigation";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Vi behöver din plats för att kunna visa närmaste MC-parkering.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -446,17 +458,21 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1;
 				PRODUCT_BUNDLE_IDENTIFIER = tech.mokan.MCParkering;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -464,7 +480,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = LY9ARPRAGG;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MCParkeringShare/Info.plist;
@@ -476,8 +492,8 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = tech.mokan.MCParkering;
+				MARKETING_VERSION = 1;
+				PRODUCT_BUNDLE_IDENTIFIER = tech.mokan.MCParkering.MCParkeringShare;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -493,7 +509,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = LY9ARPRAGG;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MCParkeringShare/Info.plist;
@@ -505,7 +521,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1;
 				PRODUCT_BUNDLE_IDENTIFIER = tech.mokan.MCParkering.MCParkeringShare;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
