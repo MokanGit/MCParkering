@@ -53,6 +53,7 @@ struct ShareExtensionView: View {
     @State private var nearestParkings: [ParkingFeature] = []
     @State private var targetCoordinate: CLLocationCoordinate2D?
     @State private var selectedParkingID: UUID?
+    @State private var lookAroundScene: MKLookAroundScene?
     
     var selectedParking: ParkingFeature? {
         if let id = selectedParkingID {
@@ -102,6 +103,10 @@ struct ShareExtensionView: View {
                     
                     Text(parking.address ?? "Okänd adress")
                         .font(.title2).bold()
+
+                    if let lookAroundScene {
+                        ShareLookAroundThumbnail(scene: lookAroundScene)
+                    }
                     
                     if let info = parking.info {
                         HStack(alignment: .top) {
@@ -148,6 +153,26 @@ struct ShareExtensionView: View {
         }
         .onAppear {
             extractSharedData()
+        }
+        .task(id: selectedParkingID) {
+            await loadLookAroundScene()
+        }
+    }
+
+    @MainActor
+    private func loadLookAroundScene() async {
+        lookAroundScene = nil
+        guard let parking = selectedParking else { return }
+
+        let parkingID = parking.id
+        let request = MKLookAroundSceneRequest(coordinate: parking.coordinate)
+
+        do {
+            let scene = try await request.scene
+            guard !Task.isCancelled, selectedParking?.id == parkingID else { return }
+            lookAroundScene = scene
+        } catch {
+            // No thumbnail is shown when Look Around imagery is unavailable.
         }
     }
     
@@ -579,5 +604,19 @@ struct ShareExtensionView: View {
             MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving
         ])
         context?.completeRequest(returningItems: nil)
+    }
+}
+
+private struct ShareLookAroundThumbnail: View {
+    let scene: MKLookAroundScene
+
+    var body: some View {
+        LookAroundPreview(
+            initialScene: scene,
+            allowsNavigation: true
+        )
+        .frame(maxWidth: .infinity)
+        .frame(height: 140)
+        .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
     }
 }
