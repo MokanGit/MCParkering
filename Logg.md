@@ -100,3 +100,25 @@ Målet var att ersätta den manuella `.env`-baserade datauppdateringen med ett s
 - Den första automatiska uppdateringen ger en stor diff när befintliga UUID:n och JSON-formatet normaliseras.
 - Efter första sammanslagningen ska diffar främst motsvara faktiska ändringar i källdatan.
 - API-nyckeln loggas inte, checkas inte in och följer inte med i appen.
+
+## 2026-08-20 - Look Around och utökad kodkontroll
+
+Målet var att ge användaren en visuell förhandsvisning av den valda MC-parkeringen och samtidigt utöka GitHub-flödet med automatisk säkerhetsanalys.
+
+### Genomfört
+
+- Lade till en interaktiv Look Around-thumbnail i den valda parkeringens detaljblad med SwiftUI och MapKit.
+- Använde Apples inbyggda Look Around-kontroll för att öppna den navigerbara helskärmsvyn.
+- Visar thumbnailen endast när MapKit returnerar en giltig scen; platser utan täckning lämnar inget tomrum eller felmeddelande i gränssnittet.
+- Gjorde detaljbladet rullningsbart och behöll knappen för vägbeskrivning till parkeringen lättillgänglig längst ned.
+- Flyttade hämtningen av Look Around-scenen till detaljbladets livscykel efter att telefontest identifierat att en uppgift kopplad till en tom villkorlig vy inte alltid startade.
+- Verifierade funktionen på fysisk iPhone och byggde både huvudappen och Share Extension med aktuell Xcode-version.
+- Utvecklade funktionen på en separat feature branch och öppnade draft pull request nummer 3 för granskning före sammanslagning till `main`.
+- Aktiverade CodeQL i GitHub som ytterligare automatisk säkerhetskontroll på pull requests.
+
+### Noteringar
+
+- Look Around-täckning och bildmaterial tillhandahålls av Apple och kan variera mellan platser och över tid.
+- MapKit kan skriva interna telemetri- och renderingsmeddelanden i Xcode-konsolen utan att de innebär ett fel i appen.
+- Den första CodeQL-körningen på pull requesten analyserar GitHub Actions och Python. Swift-koden visas inte som en separat CodeQL-analys i den aktuella konfigurationen.
+- Manuell testning på fysisk enhet är fortsatt viktig eftersom Look Around är beroende av MapKit, nätverksåtkomst och faktisk geografisk täckning.
