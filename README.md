@@ -1,120 +1,103 @@
 # MCParkering
 
-En iOS-app för att hitta laglig MC-parkering i Stockholm, byggd med SwiftUI och MapKit.
+MCParkering är en iOS-app för att hitta närliggande, dedikerad MC-parkering i Stockholm. Repot är samtidigt ett öppet exempel på AI-assisterad utveckling i Xcode och ett praktiskt CI/CD-flöde från kodändring till TestFlight.
 
-Appen består av två delar:
-- en huvudapp som visar MC-parkeringar på karta och hittar de närmaste platserna utifrån din position
-- en Share Extension som tar emot delningar från Apple Maps, Google Maps och Safari och slår upp närmaste MC-parkering nära den delade destinationen
+Projektet har två mål:
 
-## Preview
+- lösa ett konkret problem för motorcyklister
+- visa hur människa, AI, Xcode, GitHub, Xcode Cloud och TestFlight kan användas tillsammans med tydlig verifiering och mänskligt releaseansvar
 
-Det här projektet är byggt för fysisk iPhone-användning. Huvudflödena är:
-- se MC-parkeringar på karta
-- hitta de tre närmaste parkeringarna nära din nuvarande position
-- dela en plats eller länk från kart- eller webbläsarapp till MCParkering
-- starta navigering vidare till vald MC-parkering i Apple Maps
+## Produktidé
 
-## Features
-
-- SwiftUI-baserad iOS-app
-- MapKit-karta med användarposition och markörer
-- Snabb lokal uppslagning av närmaste MC-parkering
-- Share Extension för inkommande adresser, länkar och kartobjekt
-- Stöd för Apple Maps och Google Maps-delningar
-- Lokalt JSON-format optimerat för snabb laddning i appen
-
-## Tech Stack
-
-- Swift
-- SwiftUI
-- MapKit
-- CoreLocation
-- UIKit för Share Extension-host
-- Python-skript för datainsamling och datakonvertering
-
-## Project Structure
+Kärnflödet är:
 
 ```text
-MCParkering/
-├── MCParkering/                # Huvudapp i SwiftUI
-│   ├── ContentView.swift
-│   ├── LocationManager.swift
-│   ├── ParkingDataClient.swift
-│   ├── ParkingModels.swift
-│   └── mc_parkering_sthlm.json
-├── MCParkeringShare/           # Share Extension
-│   ├── Info.plist
-│   └── ShareViewController.swift
-├── Scripts/                    # Dataskript
-│   ├── fetch_data.py
-│   └── optimize_json.py
-├── example.env
-└── README.md
+Destination eller aktuell position
+        -> närmaste MC-parkeringar
+        -> välj parkering
+        -> starta navigering
 ```
 
-## Requirements
+Huvudappen visar parkeringsplatser på en MapKit-karta och kan markera de tre närmaste platserna från användarens position. En Share Extension kan ta emot platser, adresser och länkar från bland annat Apple Maps, Google Maps och Safari och söka nära den delade destinationen.
 
-- Xcode 15 eller senare
-- iOS 17.0 eller senare
-- fysisk iPhone rekommenderas för test av platsdata och Share Extension
-- Apple Developer-signering för enkel distribution till andra testare
+## Status
 
-## Getting Started
+| Funktion | Status |
+| --- | --- |
+| Karta med MC-parkeringar och användarposition | Implementerad |
+| Tre närmaste parkeringar från aktuell position | Implementerad |
+| Share Extension för kartobjekt, text och länkar | Implementerad |
+| Tolkning av Apple Maps- och Google Maps-delningar | Implementerad, fortsatt testning behövs |
+| Navigering till vald parkering i Apple Maps | Implementerad |
+| Manuell destinationssökning i huvudappen | Planerad |
+| App Shortcut och Siri via App Intents | Planerad |
+| Navigering i Google Maps | Planerad |
+| Gemensamt `FindParkingUseCase` och App Groups-cache | Planerad |
+| Datakällor från fler kommuner | Utforskning |
 
-1. Öppna `MCParkering.xcodeproj` i Xcode.
-2. Välj ditt `Development Team` för både `MCParkering` och `MCParkeringShare`.
-3. Kontrollera att båda targets använder `iOS 17.0+`.
-4. Bygg och kör appen på en fysisk enhet.
+Se [ROADMAP.md](ROADMAP.md) för prioritering och avgränsning.
 
-## Running the App
+## Teknik
 
-1. Anslut iPhone till Macen.
-2. Välj enheten som run destination i Xcode.
-3. Kör appen med `Cmd + R`.
-4. Godkänn platsbehörighet när appen frågar efter den.
+- Swift, SwiftUI och UIKit
+- MapKit och CoreLocation
+- Share Extension
+- Python-skript för datainsamling och konvertering
+- GitHub, Xcode Cloud, App Store Connect och TestFlight
 
-## Testing the Share Extension
+Parkeringsdatan kommer från [Stockholms stads Open Parking](https://openparking.stockholm.se/) och paketeras som en lokal JSON-resurs. Appen behöver därför ingen API-nyckel för att byggas eller köras.
 
-1. Installera appen på telefonen.
+## Kom igång
+
+Förutsättningar:
+
+- Xcode 26 eller senare
+- iOS 26 eller senare enligt nuvarande projektinställningar
+- fysisk iPhone rekommenderas för platsdata och Share Extension
+
+```bash
+git clone https://github.com/MokanGit/MCParkering.git
+cd MCParkering
+open MCParkering.xcodeproj
+```
+
+Välj `MCParkering`-schemat och kör först i simulatorn. För en fysisk enhet väljer du ett eget Development Team i Xcode för både huvudappen och extension-targeten. Lokala ändringar av team och bundle identifiers ska normalt inte följa med i en pull request.
+
+Den incheckade JSON-filen räcker för vanlig apputveckling. API-nyckel behövs bara om du uttryckligen vill hämta ett nytt dataset; se [datapipelinen](docs/data-pipeline.md).
+
+## Testa Share Extension
+
+1. Installera appen på en iPhone.
 2. Öppna Apple Maps, Google Maps eller Safari.
-3. Dela en plats eller länk.
-4. Välj `MCParkering` i share sheet.
-5. Appen försöker hitta närmaste MC-parkering nära destinationen.
+3. Dela en plats, adress eller kartlänk.
+4. Välj MCParkering i delningsmenyn.
+5. Kontrollera att destinationen och närliggande MC-parkeringar visas.
+6. Välj en parkering och kontrollera att Apple Maps kan startas.
 
-## Data Source
+Delningsformat skiljer sig mellan appar och kan ändras över tid. Beskriv därför alltid avsändande app, iOS-version och delad datatyp i en felrapport.
 
-Parkeringsdatan bygger på Stockholms stads öppna data:
+## AI och kvalitet
 
-- [Stockholms Stad Open Parking](https://openparking.stockholm.se/)
+AI används som utvecklingspartner för analys, kod, felsökning, dokumentation och testidéer. Projektägaren ansvarar fortfarande för produktbeslut, kodgranskning, integritet, verifiering på Apple-enheter och godkännande av releaser.
 
-## Data Scripts
+Repot publicerar beslut och lärdomar, inte hemligheter eller råa konversationer. Läs mer i [AI-arbetssättet](docs/ai-workflow.md) och [Lessons learned](docs/lessons-learned.md).
 
-I `Scripts/` finns två hjälpskript:
+## Bidra
 
-- `fetch_data.py`: hämtar rådata från API:t
-- `optimize_json.py`: konverterar rådatan till ett kompakt JSON-format för appen
+Bidrag via issues och pull requests är välkomna. Börja i [CONTRIBUTING.md](CONTRIBUTING.md), där utvecklingsmiljö, testförväntningar och AI-redovisning beskrivs.
 
-För att använda skripten:
+Bidragsgivare behöver inte och ska inte ha åtkomst till projektägarens Apple Developer-konto, certifikat, API-nycklar eller App Store Connect. Projektägaren granskar och slår ihop bidrag och är ensam ansvarig för signering, TestFlight och App Store-publicering.
 
-1. Kopiera `example.env` eller `Scripts/example.env` till `Scripts/.env`
-2. Fyll i din API-nyckel
-3. Kör skripten från `Scripts/`
+## Dokumentation
 
-## Beta Distribution
+- [Arkitektur](docs/architecture.md)
+- [AI-assisterat arbetssätt](docs/ai-workflow.md)
+- [CI/CD och releaseansvar](docs/ci-cd.md)
+- [Datapipeline](docs/data-pipeline.md)
+- [Lessons learned](docs/lessons-learned.md)
+- [Roadmap](ROADMAP.md)
+- [Utvecklings- och publiceringslogg](Logg.md)
 
-Praktiska alternativ för testdistribution:
+## Licens
 
-- Xcode-installation direkt till egen telefon
-- TestFlight för interna och externa testare
-
-För bredare beta-test är TestFlight den rimliga vägen, särskilt eftersom projektet innehåller en Share Extension.
-
-## Notes
-
-- Share Extension-flödet är känsligt för hur andra appar delar data, särskilt Google Maps-kortlänkar
-- Projektet innehåller diagnostik för att felsöka delningsflödet under utveckling
-- Produktionsdistribution bör använda Release-konfiguration och TestFlight
-
-## License
-
-Ingen licens angiven ännu.
+Projektet publiceras under [CC0 1.0 Universal](LICENSE). Kontrollera alltid eventuella separata villkor och kvalitetsbegränsningar för externa datakällor.
