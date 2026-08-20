@@ -33,11 +33,13 @@ private let shareDiagnosticsEnabled: Bool = {
 
 #if DEBUG
 private func debugShareInfo(_ message: @autoclosure () -> String) {
-    shareLogger.info("\(message(), privacy: .public)")
+    let value = message()
+    shareLogger.info("\(value, privacy: .public)")
 }
 
 private func debugShareError(_ message: @autoclosure () -> String) {
-    shareLogger.error("\(message(), privacy: .public)")
+    let value = message()
+    shareLogger.error("\(value, privacy: .public)")
 }
 #else
 private func debugShareInfo(_ message: @autoclosure () -> String) {}
