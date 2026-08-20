@@ -6,6 +6,8 @@ Projektets releaseflöde är byggt för att källkoden ska kunna vara öppen sam
 
 ```mermaid
 flowchart LR
+    DATA[GitHub Action: parkeringsdata] --> PR[Draft pull request]
+    PR --> GH
     DEV[Lokal utveckling och test] --> GH[GitHub main]
     GH --> XC[Xcode Cloud build]
     XC --> ASC[App Store Connect]
@@ -13,7 +15,13 @@ flowchart LR
     TF --> DEVICE[Test på fysisk iPhone]
 ```
 
-Appen har byggts utan lokal `.env`, skickats genom Xcode Cloud och installerats via en intern TestFlight-grupp. API-nyckeln används endast vid lokal datahämtning och är inte en del av appbygget.
+Appen har byggts utan lokal `.env`, skickats genom Xcode Cloud och installerats via en intern TestFlight-grupp. Parkeringsnyckeln finns som ett avgränsat GitHub Actions-secret och är inte en del av appbygget.
+
+## Automatiserad parkeringsdata
+
+Ett separat workflow hämtar Stockholms MC-parkeringsdata varje vecka eller när maintainern startar det manuellt. Flödet kör tester och validering, uppdaterar endast den publika JSON-filen och öppnar en draft pull request.
+
+Det automatiska flödet kan alltså föreslå en ändring men inte publicera appen. Maintainern granskar och slår ihop dataändringen, varefter den vanliga build- och releasekedjan tar vid.
 
 ## Två separata spår
 
@@ -40,7 +48,7 @@ Detta spår kräver inte App Store Connect, distributionscertifikat eller projek
 
 | Information | Hantering |
 | --- | --- |
-| Parkerings-API-nyckel | Endast lokal `Scripts/.env`, aldrig i Git eller app-bundle |
+| Parkerings-API-nyckel | GitHub Actions repository secret, endast tillgänglig för uppdateringsworkflow |
 | Apple-inloggning | Hanteras utanför repot av projektägaren |
 | Certifikat och privata nycklar | Delas inte och checkas aldrig in |
 | Provisioning och distribution | Automatisk signing/Xcode Cloud under projektägarens kontroll |
@@ -52,7 +60,7 @@ En pull request ska aldrig kräva en produktionshemlighet för att kunna granska
 
 - [ ] Godkända ändringar finns på avsedd commit.
 - [ ] Huvudapp och Share Extension bygger i Release-konfiguration.
-- [ ] Appen bygger utan `.env` och andra lokala utvecklingsfiler.
+- [ ] Appen bygger utan `.env`, API-nyckel och andra lokala utvecklingsfiler.
 - [ ] Version och buildnummer är korrekta och buildnumret är unikt.
 - [ ] Behörigheter, signing, bundle identifiers och extension-konfiguration är kontrollerade.
 - [ ] Kartan, platsbehörighet, närmaste-sökning och Apple Maps-navigation fungerar.
@@ -66,7 +74,7 @@ En pull request ska aldrig kräva en produktionshemlighet för att kunna granska
 - automatiska build- och testkontroller på pull requests
 - ett riktigt unit test-target och ett litet stabilt testdataset
 - automatiserad kontroll att förbjudna filer inte ingår i app-resurser
-- verifiering av datasetets schema och aktualitet
+- metadata som visar datasetets aktualitet i appen
 - tydligare versionsstrategi och release notes från sammanslagna ändringar
 - en dokumenterad rutin för att stoppa eller ersätta en felaktig TestFlight-build
 

@@ -42,10 +42,12 @@ Se [ROADMAP.md](ROADMAP.md) för prioritering och avgränsning.
 - Swift, SwiftUI och UIKit
 - MapKit och CoreLocation
 - Share Extension
-- Python-skript för datainsamling och konvertering
+- GitHub Actions och Python för validerad datauppdatering
 - GitHub, Xcode Cloud, App Store Connect och TestFlight
 
-Parkeringsdatan kommer från [Stockholms stads Open Parking](https://openparking.stockholm.se/) och paketeras som en lokal JSON-resurs. Appen behöver därför ingen API-nyckel för att byggas eller köras.
+Parkeringsdatan kommer från [Stockholms stads Open Parking](https://openparking.stockholm.se/) och paketeras som en lokal JSON-resurs. En schemalagd GitHub Action hämtar och validerar ny data och öppnar en draft pull request. Den skriver aldrig direkt till `main`.
+
+Appen och bidragsgivare behöver ingen API-nyckel. Nyckeln finns endast som GitHub repository secret för det avgränsade uppdateringsflödet.
 
 ## Kom igång
 
@@ -63,7 +65,7 @@ open MCParkering.xcodeproj
 
 Välj `MCParkering`-schemat och kör först i simulatorn. För en fysisk enhet väljer du ett eget Development Team i Xcode för både huvudappen och extension-targeten. Lokala ändringar av team och bundle identifiers ska normalt inte följa med i en pull request.
 
-Den incheckade JSON-filen räcker för vanlig apputveckling. API-nyckel behövs bara om du uttryckligen vill hämta ett nytt dataset; se [datapipelinen](docs/data-pipeline.md).
+Den incheckade JSON-filen räcker för vanlig apputveckling. Se [datapipelinen](docs/data-pipeline.md) för den automatiska uppdateringen och hur den kan testas utan hemligheter.
 
 ## Testa Share Extension
 

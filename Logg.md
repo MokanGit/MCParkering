@@ -79,3 +79,24 @@ Målet var att förbereda MC-parkeringen för TestFlight via App Store Connect o
 - `Scripts/.env` ska inte checkas in i GitHub.
 - Appen ska kunna byggas utan `.env`, eftersom den bara behövs för det lokala synk-scriptet.
 - Team ID och andra kontodetaljer dokumenteras inte i denna publika logg.
+
+## 2026-08-20 - Automatiserad uppdatering av parkeringsdata
+
+Målet var att ersätta den manuella `.env`-baserade datauppdateringen med ett säkrare och mer granskningsbart GitHub Actions-flöde.
+
+### Genomfört
+
+- Samlade hämtning, validering och optimering i `Scripts/update_parking_data.py`.
+- Flyttade API-nyckeln till GitHub Actions repository secrets.
+- Lade till schemalagd körning varje vecka och möjlighet till manuell start.
+- Lade till tester med lokal fixture så att transformeringen kan verifieras utan nätverk eller hemligheter.
+- Införde kontroll av datamängd, struktur, koordinater och dubbletter innan appfilen ersätts.
+- Bytte från slumpmässiga till stabila identifierare och läsbar, deterministiskt sorterad JSON.
+- Konfigurerade Actionen att öppna en draft pull request i stället för att skriva direkt till `main`.
+- Behöll maintainerkontroll över granskning, merge, Xcode Cloud, TestFlight och App Store.
+
+### Noteringar
+
+- Den första automatiska uppdateringen ger en stor diff när befintliga UUID:n och JSON-formatet normaliseras.
+- Efter första sammanslagningen ska diffar främst motsvara faktiska ändringar i källdatan.
+- API-nyckeln loggas inte, checkas inte in och följer inte med i appen.
