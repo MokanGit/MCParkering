@@ -2,6 +2,14 @@ import Foundation
 import CoreLocation
 import Combine
 
+#if DEBUG
+private func debugParkingLog(_ message: @autoclosure () -> String) {
+    print(message())
+}
+#else
+private func debugParkingLog(_ message: @autoclosure () -> String) {}
+#endif
+
 class ParkingDataClient: ObservableObject {
     
     @Published var parkings: [ParkingFeature] = []
@@ -12,7 +20,7 @@ class ParkingDataClient: ObservableObject {
     
     func loadData() {
         guard let url = Bundle.main.url(forResource: "mc_parkering_sthlm", withExtension: "json") else {
-            print("⚠️ Hittade inte JSON-filen!")
+            debugParkingLog("Hittade inte JSON-filen.")
             return
         }
         
@@ -24,10 +32,10 @@ class ParkingDataClient: ObservableObject {
             DispatchQueue.main.async {
                 self.parkings = decodedParkings
             }
-            print("✅ Succé! Laddade in \(decodedParkings.count) optimerade parkeringar från filen.")
+            debugParkingLog("Laddade in \(decodedParkings.count) optimerade parkeringar från filen.")
             
         } catch {
-            print("❌ Kunde inte läsa in eller översätta datan: \(error)")
+            debugParkingLog("Kunde inte läsa in eller översätta datan: \(error)")
         }
     }
     

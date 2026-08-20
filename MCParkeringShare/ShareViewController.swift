@@ -31,6 +31,19 @@ private let shareDiagnosticsEnabled: Bool = {
 #endif
 }()
 
+#if DEBUG
+private func debugShareInfo(_ message: @autoclosure () -> String) {
+    shareLogger.info("\(message(), privacy: .public)")
+}
+
+private func debugShareError(_ message: @autoclosure () -> String) {
+    shareLogger.error("\(message(), privacy: .public)")
+}
+#else
+private func debugShareInfo(_ message: @autoclosure () -> String) {}
+private func debugShareError(_ message: @autoclosure () -> String) {}
+#endif
+
 struct ShareExtensionView: View {
     var context: NSExtensionContext?
     @StateObject private var dataClient = ParkingDataClient()
@@ -140,23 +153,23 @@ struct ShareExtensionView: View {
         let extensionItems = (context?.inputItems as? [NSExtensionItem]) ?? []
         let attachments = extensionItems.flatMap { $0.attachments ?? [] }
 
-        shareLogger.info("Share extension opened with \(extensionItems.count, privacy: .public) items and \(attachments.count, privacy: .public) attachments")
+        debugShareInfo("Share extension opened with \(extensionItems.count) items and \(attachments.count) attachments")
         for (index, attachment) in attachments.enumerated() {
             let types = attachment.registeredTypeIdentifiers.joined(separator: ", ")
-            shareLogger.info("Attachment \(index, privacy: .public) types: \(types, privacy: .public)")
+            debugShareInfo("Attachment \(index) types: \(types)")
         }
 
         guard !attachments.isEmpty else {
             statusText = "Kunde inte läsa datan."
             debugDetails = "Inga bilagor hittades i extensionContext.inputItems."
-            shareLogger.error("No attachments found in extension context")
+            debugShareError("No attachments found in extension context")
             isLoading = false
             return
         }
         
         // 1. Leta efter Apple Maps Karta i ALLA attachments (inte bara första)
         if let mapAttachment = attachments.first(where: { $0.hasItemConformingToTypeIdentifier("com.apple.mapkit.map-item") }) {
-            shareLogger.info("Selected map-item attachment")
+            debugShareInfo("Selected map-item attachment")
             loadMapItem(from: mapAttachment)
             return
         }
@@ -171,7 +184,7 @@ struct ShareExtensionView: View {
 
         // 3. Leta efter Länk som reservväg
         if let urlAttachment = attachments.first(where: { $0.hasItemConformingToTypeIdentifier(UTType.url.identifier) }) {
-            shareLogger.info("Selected URL attachment")
+            debugShareInfo("Selected URL attachment")
             loadURL(from: urlAttachment)
             return
         }
@@ -180,25 +193,25 @@ struct ShareExtensionView: View {
         DispatchQueue.main.async {
             self.statusText = "Okänt filformat. Fick:\n\(types)"
             self.debugDetails = self.debugSummary(for: extensionItems, attachments: attachments)
-            shareLogger.error("Unsupported attachment types: \(types, privacy: .public)")
+            debugShareError("Unsupported attachment types: \(types)")
             self.isLoading = false
         }
     }
     
     private func loadText(from attachment: NSItemProvider, fallbackURLAttachment: NSItemProvider?) {
         let typeToLoad = attachment.hasItemConformingToTypeIdentifier(UTType.plainText.identifier) ? UTType.plainText.identifier : UTType.text.identifier
-        shareLogger.info("Selected text attachment with type \(typeToLoad, privacy: .public)")
+        debugShareInfo("Selected text attachment with type \(typeToLoad)")
 
         attachment.loadObject(ofClass: NSString.self) { object, error in
             DispatchQueue.main.async {
                 let text = (object as? NSString as String?)?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
                 if !text.isEmpty {
-                    shareLogger.info("Decoded shared text: \(text, privacy: .public)")
+                    debugShareInfo("Decoded shared text: \(text)")
                     self.handleSharedText(text)
                     return
                 }
 
-                shareLogger.info("Text attachment was empty. Falling back to URL attachment: \(fallbackURLAttachment != nil, privacy: .public)")
+                debugShareInfo("Text attachment was empty. Falling back to URL attachment: \(fallbackURLAttachment != nil)")
                 if let fallbackURLAttachment {
                     self.loadURL(from: fallbackURLAttachment)
                     return
@@ -206,7 +219,7 @@ struct ShareExtensionView: View {
 
                 self.statusText = "Ingen adress hittades i texten."
                 self.debugDetails = error?.localizedDescription ?? self.describeSharedValue(object)
-                shareLogger.error("Failed to decode text payload. Error: \(error?.localizedDescription ?? "nil", privacy: .public). Payload: \(self.describeSharedValue(object), privacy: .public)")
+                debugShareError("Failed to decode text payload. Error: \(error?.localizedDescription ?? "nil"). Payload: \(self.describeSharedValue(object))")
                 self.isLoading = false
             }
         }
@@ -224,12 +237,12 @@ struct ShareExtensionView: View {
                 
                 if let data = mapData,
                    let mapItem = try? NSKeyedUnarchiver.unarchivedObject(ofClass: MKMapItem.self, from: data) {
-                    shareLogger.info("Decoded map item at \(mapItem.location.coordinate.latitude, privacy: .public), \(mapItem.location.coordinate.longitude, privacy: .public)")
+                    debugShareInfo("Decoded map item at \(mapItem.location.coordinate.latitude), \(mapItem.location.coordinate.longitude)")
                     self.updateNearestParkings(for: mapItem.location.coordinate)
                 } else {
                     self.statusText = "Kunde inte packa upp kartdatan."
                     self.debugDetails = error?.localizedDescription ?? "Type: \(type(of: item as Any))"
-                    shareLogger.error("Failed to decode map item. Error: \(error?.localizedDescription ?? "nil", privacy: .public)")
+                    debugShareError("Failed to decode map item. Error: \(error?.localizedDescription ?? "nil")")
                     self.isLoading = false
                 }
             }
@@ -240,12 +253,12 @@ struct ShareExtensionView: View {
         attachment.loadObject(ofClass: NSURL.self) { data, error in
             DispatchQueue.main.async {
                 if let url = data as? URL {
-                    shareLogger.info("Decoded shared URL: \(url.absoluteString, privacy: .public)")
+                    debugShareInfo("Decoded shared URL: \(url.absoluteString)")
                     self.handleSharedURL(url)
                 } else {
                     self.statusText = "Kunde inte tolka länken."
                     self.debugDetails = error?.localizedDescription ?? "Type: \(type(of: data as Any))"
-                    shareLogger.error("Failed to decode URL payload. Error: \(error?.localizedDescription ?? "nil", privacy: .public). Payload type: \(String(describing: type(of: data as Any)), privacy: .public)")
+                    debugShareError("Failed to decode URL payload. Error: \(error?.localizedDescription ?? "nil"). Payload type: \(String(describing: type(of: data as Any)))")
                     self.isLoading = false
                 }
             }
@@ -254,7 +267,7 @@ struct ShareExtensionView: View {
     
     private func handleSharedURL(_ url: URL) {
         if let coordinate = extractCoordinate(from: url) {
-            shareLogger.info("Extracted coordinate from URL: \(coordinate.latitude, privacy: .public), \(coordinate.longitude, privacy: .public)")
+            debugShareInfo("Extracted coordinate from URL: \(coordinate.latitude), \(coordinate.longitude)")
             updateNearestParkings(for: coordinate)
             return
         }
@@ -263,18 +276,18 @@ struct ShareExtensionView: View {
         if searchTerm == url.absoluteString, url.host?.contains("goo.gl") == true {
             statusText = "Följer Google Maps-länk..."
             debugDetails = url.absoluteString
-            shareLogger.info("Resolving Google short URL: \(url.absoluteString, privacy: .public)")
+            debugShareInfo("Resolving Google short URL: \(url.absoluteString)")
             resolveShortURL(url)
             return
         }
 
-        shareLogger.info("Falling back to search term from URL: \(searchTerm, privacy: .public)")
+        debugShareInfo("Falling back to search term from URL: \(searchTerm)")
         findParking(from: searchTerm)
     }
 
     private func handleSharedText(_ text: String) {
         if let coordinate = extractCoordinate(from: text) {
-            shareLogger.info("Extracted coordinate from text: \(coordinate.latitude, privacy: .public), \(coordinate.longitude, privacy: .public)")
+            debugShareInfo("Extracted coordinate from text: \(coordinate.latitude), \(coordinate.longitude)")
             updateNearestParkings(for: coordinate)
             return
         }
@@ -283,12 +296,12 @@ struct ShareExtensionView: View {
         guard !searchText.isEmpty else {
             statusText = "Ingen adress hittades i texten."
             debugDetails = text
-            shareLogger.error("Shared text was empty after normalization")
+            debugShareError("Shared text was empty after normalization")
             isLoading = false
             return
         }
 
-        shareLogger.info("Using shared text as search term: \(searchText, privacy: .public)")
+        debugShareInfo("Using shared text as search term: \(searchText)")
         findParking(from: searchText)
     }
 
@@ -408,7 +421,7 @@ struct ShareExtensionView: View {
                 if let error {
                     self.statusText = "Kunde inte öppna Google Maps-länken."
                     self.debugDetails = error.localizedDescription
-                    shareLogger.error("Failed to resolve short URL. Error: \(error.localizedDescription, privacy: .public)")
+                    debugShareError("Failed to resolve short URL. Error: \(error.localizedDescription)")
                     self.isLoading = false
                     return
                 }
@@ -416,12 +429,12 @@ struct ShareExtensionView: View {
                 guard let resolvedURL = response?.url else {
                     self.statusText = "Kunde inte öppna Google Maps-länken."
                     self.debugDetails = url.absoluteString
-                    shareLogger.error("Short URL resolved without final response URL")
+                    debugShareError("Short URL resolved without final response URL")
                     self.isLoading = false
                     return
                 }
 
-                shareLogger.info("Resolved Google short URL to: \(resolvedURL.absoluteString, privacy: .public)")
+                debugShareInfo("Resolved Google short URL to: \(resolvedURL.absoluteString)")
                 self.handleResolvedShortURL(resolvedURL, fallbackOriginalURL: url)
             }
         }.resume()
@@ -429,27 +442,27 @@ struct ShareExtensionView: View {
 
     private func handleResolvedShortURL(_ resolvedURL: URL, fallbackOriginalURL: URL) {
         if let unwrappedURL = unwrapGoogleConsentURL(resolvedURL) {
-            shareLogger.info("Unwrapped Google consent URL to: \(unwrappedURL.absoluteString, privacy: .public)")
+            debugShareInfo("Unwrapped Google consent URL to: \(unwrappedURL.absoluteString)")
             handleResolvedShortURL(unwrappedURL, fallbackOriginalURL: fallbackOriginalURL)
             return
         }
 
         if let coordinate = extractCoordinate(from: resolvedURL) {
-            shareLogger.info("Extracted coordinate from resolved URL: \(coordinate.latitude, privacy: .public), \(coordinate.longitude, privacy: .public)")
+            debugShareInfo("Extracted coordinate from resolved URL: \(coordinate.latitude), \(coordinate.longitude)")
             updateNearestParkings(for: coordinate)
             return
         }
 
         let resolvedSearchTerm = extractSearchTerm(from: resolvedURL)
         if resolvedSearchTerm != resolvedURL.absoluteString {
-            shareLogger.info("Using resolved URL search term: \(resolvedSearchTerm, privacy: .public)")
+            debugShareInfo("Using resolved URL search term: \(resolvedSearchTerm)")
             findParking(from: resolvedSearchTerm)
             return
         }
 
         statusText = "Google Maps-länken kunde inte tydas."
         debugDetails = resolvedURL.absoluteString == fallbackOriginalURL.absoluteString ? fallbackOriginalURL.absoluteString : resolvedURL.absoluteString
-        shareLogger.error("Resolved URL still unusable: \(resolvedURL.absoluteString, privacy: .public)")
+        debugShareError("Resolved URL still unusable: \(resolvedURL.absoluteString)")
         isLoading = false
     }
 
@@ -492,7 +505,7 @@ struct ShareExtensionView: View {
     
     func findParking(from text: String) {
         statusText = "Söker efter parkering..."
-        shareLogger.info("Starting MKLocalSearch for: \(text, privacy: .public)")
+        debugShareInfo("Starting MKLocalSearch for: \(text)")
         
         let request = MKLocalSearch.Request()
         request.naturalLanguageQuery = text
@@ -503,11 +516,11 @@ struct ShareExtensionView: View {
                 guard let location = response?.mapItems.first?.location else {
                     self.statusText = "Kunde inte förstå adressen."
                     self.debugDetails = error?.localizedDescription ?? text
-                    shareLogger.error("MKLocalSearch failed. Error: \(error?.localizedDescription ?? "nil", privacy: .public)")
+                    debugShareError("MKLocalSearch failed. Error: \(error?.localizedDescription ?? "nil")")
                     self.isLoading = false
                     return
                 }
-                shareLogger.info("MKLocalSearch resolved to \(location.coordinate.latitude, privacy: .public), \(location.coordinate.longitude, privacy: .public)")
+                debugShareInfo("MKLocalSearch resolved to \(location.coordinate.latitude), \(location.coordinate.longitude)")
                 self.updateNearestParkings(for: location.coordinate)
             }
         }
